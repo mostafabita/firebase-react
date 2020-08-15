@@ -5,10 +5,17 @@ import './index.scss';
 import * as serviceWorker from './serviceWorker';
 
 import App from './components/App';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import StylesProvider from '@material-ui/styles/StylesProvider';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <React.Fragment>
+      <CssBaseline />
+      <StylesProvider>
+        <App />
+      </StylesProvider>
+    </React.Fragment>
   </React.StrictMode>,
   document.getElementById('root')
 );
