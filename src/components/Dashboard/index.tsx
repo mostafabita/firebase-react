@@ -1,10 +1,10 @@
 import React from 'react';
 import Typography from '@material-ui/core/Typography';
 
-export function AccountPage() {
+export function DashboardPage() {
   return (
     <Typography paragraph>
-      Account lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+      Dashboard lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
       tempor incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus
       non enim praesent elementum facilisis leo vel. Risus at ultrices mi tempus
       imperdiet. Semper risus in hendrerit gravida rutrum quisque non tellus.
@@ -20,4 +20,4 @@ export function AccountPage() {
   );
 }
 
-export default AccountPage;
+export default DashboardPage;

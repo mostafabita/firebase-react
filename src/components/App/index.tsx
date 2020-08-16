@@ -1,26 +1,26 @@
 import React from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
-import LandingPage from '../Landing';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import SignUpPage from '../SignUp';
 import SignInPage from '../SignIn';
-import PasswordForgetPage from '../PasswordForget';
-import HomePage from '../Home';
-import AccountPage from '../Account';
-import AdminPage from '../Admin';
+import DashboardMasterPage from '../DashboardMaster';
 
-import * as ROUTES from '../../constants/routes';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import config from '../../config/firebase';
+import { FirebaseAuthProvider } from '@react-firebase/auth';
 
 const App = () => (
   <React.Fragment>
-    <Router>
-      <Route exact path={ROUTES.LANDING} component={LandingPage} />
-      <Route path={ROUTES.SIGN_UP} component={SignUpPage} />
-      <Route path={ROUTES.SIGN_IN} component={SignInPage} />
-      <Route path={ROUTES.PASSWORD_FORGET} component={PasswordForgetPage} />
-      <Route path={ROUTES.HOME} component={HomePage} />
-      <Route path={ROUTES.ACCOUNT} component={AccountPage} />
-      <Route path={ROUTES.ADMIN} component={AdminPage} />
-    </Router>
+    <FirebaseAuthProvider firebase={firebase} {...config}>
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={SignInPage} />
+          <Route path="/signup" component={SignUpPage} />
+          <Route path="/signin" component={SignInPage} />
+          <Route path="/dashboard" component={DashboardMasterPage} />
+        </Switch>
+      </BrowserRouter>
+    </FirebaseAuthProvider>
   </React.Fragment>
 );
 

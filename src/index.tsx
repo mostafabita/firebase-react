@@ -9,14 +9,12 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import StylesProvider from '@material-ui/styles/StylesProvider';
 
 ReactDOM.render(
-  <React.StrictMode>
-    <React.Fragment>
-      <CssBaseline />
-      <StylesProvider>
-        <App />
-      </StylesProvider>
-    </React.Fragment>
-  </React.StrictMode>,
+  <React.Fragment>
+    <CssBaseline />
+    <StylesProvider>
+      <App />
+    </StylesProvider>
+  </React.Fragment>,
   document.getElementById('root')
 );
 
