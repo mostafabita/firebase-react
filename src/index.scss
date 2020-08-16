@@ -5,6 +5,8 @@
 @import '~bootstrap/scss/grid';
 @import '~bootstrap/scss/utilities';
 
+$enable-shadows: true;
+
 * {
   &:active,
   :focus {

@@ -22,7 +22,8 @@ import DashboardPage from '../Dashboard';
 import AccountPage from '../Account';
 import Avatar from '@material-ui/core/Avatar';
 import { Box } from '@material-ui/core';
-import firebase from 'firebase/app';
+import { AuthService } from '../../services/auth';
+import clsx from 'clsx';
 
 const drawerWidth = 240;
 
@@ -64,19 +65,21 @@ const useStyles = makeStyles((theme: Theme) => ({
 }));
 
 export function DashboardMasterPage() {
-  let { path } = useRouteMatch();
   const classes = useStyles();
+  const { path } = useRouteMatch();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [avatarAnchorEl, setAvatarAnchorEl] = useState<null | HTMLElement>(
     null
   );
+  const authService = AuthService.getInstance();
+  const user = authService.currentUser;
 
-  const handleDrawerToggle = () => {
+  function handleDrawerToggle() {
     setMobileOpen(!mobileOpen);
-  };
+  }
 
   function logout() {
-    firebase.auth().signOut();
+    authService.logout();
   }
 
   const drawer = (
@@ -116,11 +119,12 @@ export function DashboardMasterPage() {
           </IconButton>
           <Box flexGrow="1">
             <Typography variant="h6" noWrap>
-              Firebase tutorial with React
+              Firebase tutorial {user ? `− ${user?.displayName}` : ''}
             </Typography>
           </Box>
           <Box>
             <Avatar
+              src={user?.photoURL}
               className={classes.avatar}
               onClick={(e) => setAvatarAnchorEl(e.currentTarget)}
             >

@@ -12,7 +12,7 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import Box from '@material-ui/core/Box';
 import { Link as RouterLink } from 'react-router-dom';
-import { AuthService } from '../../api/auth';
+import { AuthService } from '../../services/auth';
 
 const useStyles = makeStyles((theme: Theme) => ({
   root: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 
 function SignInPage() {
   const classes = useStyles();
-  const authService = new AuthService();
+  const authService = AuthService.getInstance();
 
   function signInWithGoogle() {
     authService.signInWithGoogle();
@@ -57,7 +57,7 @@ function SignInPage() {
           </Button>
 
           <Box marginTop={2}>
-            <Typography>− Or −</Typography>
+            <Typography>− OR −</Typography>
           </Box>
           <form noValidate>
             <TextField
