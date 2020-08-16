@@ -13,17 +13,14 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles, Theme } from '@material-ui/core/styles';
 import { Route, Switch, useRouteMatch, Link } from 'react-router-dom';
 import DashboardPage from '../Dashboard';
 import AccountPage from '../Account';
 import Avatar from '@material-ui/core/Avatar';
-import { Box } from '@material-ui/core';
+import { Box, Button } from '@material-ui/core';
 import { AuthService } from '../../services/auth';
-import clsx from 'clsx';
 
 const drawerWidth = 240;
 
@@ -59,8 +56,9 @@ const useStyles = makeStyles((theme: Theme) => ({
   toolbar: theme.mixins.toolbar,
   avatar: {
     cursor: 'pointer',
-    width: theme.spacing(6),
-    height: theme.spacing(6),
+    width: theme.spacing(9),
+    height: theme.spacing(9),
+    margin: `0 auto ${theme.spacing(1)}px`,
   },
 }));
 
@@ -68,9 +66,6 @@ export function DashboardMasterPage() {
   const classes = useStyles();
   const { path } = useRouteMatch();
   const [mobileOpen, setMobileOpen] = useState(false);
-  const [avatarAnchorEl, setAvatarAnchorEl] = useState<null | HTMLElement>(
-    null
-  );
   const authService = AuthService.getInstance();
   const user = authService.currentUser;
 
@@ -85,7 +80,14 @@ export function DashboardMasterPage() {
   const drawer = (
     <div>
       <div className={classes.toolbar} />
-      <Divider />
+      <Avatar src={user?.photoURL} className={classes.avatar}>
+        MB
+      </Avatar>
+
+      <Typography variant="h6" align="center" noWrap>
+        {user?.displayName}
+      </Typography>
+      <Divider className="mx-3 mt-4 mb-2" />
       <List>
         <ListItem button to="/dashboard/home" component={Link}>
           <ListItemIcon>
@@ -110,7 +112,6 @@ export function DashboardMasterPage() {
         <Toolbar>
           <IconButton
             color="inherit"
-            aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
             className={classes.menuButton}
@@ -119,29 +120,13 @@ export function DashboardMasterPage() {
           </IconButton>
           <Box flexGrow="1">
             <Typography variant="h6" noWrap>
-              Firebase tutorial {user ? `− ${user?.displayName}` : ''}
+              Firebase tutorial
             </Typography>
           </Box>
           <Box>
-            <Avatar
-              src={user?.photoURL}
-              className={classes.avatar}
-              onClick={(e) => setAvatarAnchorEl(e.currentTarget)}
-            >
-              MB
-            </Avatar>
-            <Menu
-              id="simple-menu"
-              anchorEl={avatarAnchorEl}
-              keepMounted
-              open={Boolean(avatarAnchorEl)}
-              onClose={() => setAvatarAnchorEl(null)}
-            >
-              <MenuItem to="/dashboard/account" component={Link}>
-                Account
-              </MenuItem>
-              <MenuItem onClick={logout}>Logout</MenuItem>
-            </Menu>
+            <Button onClick={logout} color="inherit">
+              Logout
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>
