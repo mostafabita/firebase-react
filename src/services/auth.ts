@@ -39,3 +39,5 @@ export class AuthService {
     this.history.push('/');
   }
 }
+
+export default AuthService;
